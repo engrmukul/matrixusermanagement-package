@@ -13,5 +13,12 @@
         "psr-4": {
             "Mukul\\Matrixusermanagement\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mukul\\Matrixusermanagement\\MatrixusermanagementServiceProvider"
+            ]
+        }
     }
 }
