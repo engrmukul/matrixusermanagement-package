@@ -8,7 +8,9 @@
             "email": "mizan@ticonsys.com"
         }
     ],
-    "require": {},
+    "require": {
+        "yajra/laravel-datatables-oracle": "^9.10"
+    },
     "autoload": {
         "psr-4": {
             "Mukul\\Matrixusermanagement\\": "src/"

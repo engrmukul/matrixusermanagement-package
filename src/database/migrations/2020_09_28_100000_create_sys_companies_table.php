@@ -16,16 +16,14 @@ class CreateSysCompaniesTable extends Migration
         Schema::create('sys_companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',100);
-            $table->string('phone',14);
-            $table->string('website',150);
-            $table->string('logo',150);
-            $table->text('address');
+            $table->string('email',50)->unique();
+            $table->string('phone',14)->unique();
+            $table->string('website',150)->nullable()->default(NULL);
+            $table->string('logo',150)->nullable()->default(NULL);
+            $table->text('address')->nullable()->default(NULL);
             $table->enum('status', ['active','inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
-            //$table->foreignId('created_by')->references('id')->on('sys_users')->onDelete('cascade');
-            //$table->foreignId('updated_by')->nullable()->references('id')->on('sys_users')->onDelete('cascade');
-            //$table->foreignId('deleted_by')->nullable()->references('id')->on('sys_users')->onDelete('cascade');
         });
     }
 
