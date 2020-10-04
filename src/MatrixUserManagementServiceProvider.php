@@ -39,11 +39,6 @@ class MatrixUserManagementServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/matrixusermanagement.php' => config_path('matrixusermanagement.php'),
         ]);
-
-        $this->loadTranslationsFrom(__DIR__.'/translations', 'matrixusermanagement');
-        $this->publishes([
-            __DIR__.'/translations' => resource_path('lang/vendor/matrixusermanagement'),
-        ]);
     }
 
     public function register()
