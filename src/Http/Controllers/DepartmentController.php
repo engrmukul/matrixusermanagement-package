@@ -2,28 +2,28 @@
 
 namespace Mukul\Matrixusermanagement\Http\Controllers;
 
-use  Mukul\Matrixusermanagement\Models\SysBranch;
+use  Mukul\Matrixusermanagement\Models\SysDepartment;
 use Illuminate\Http\Request;
-use Mukul\Matrixusermanagement\Contracts\BranchContract;
-use Mukul\Matrixusermanagement\Http\Requests\BranchStoreFormRequest;
-use Mukul\Matrixusermanagement\Http\Requests\BranchUpdateFormRequest;
+use Mukul\Matrixusermanagement\Contracts\DepartmentContract;
+use Mukul\Matrixusermanagement\Http\Requests\DepartmentStoreFormRequest;
+use Mukul\Matrixusermanagement\Http\Requests\DepartmentUpdateFormRequest;
 
-class BranchController extends BaseController
+class DepartmentController extends BaseController
 {
-    protected $branchRepository;
+    protected $departmentRepository;
 
-    public function __construct(BranchContract $branchRepository)
+    public function __construct(DepartmentContract $departmentRepository)
     {
-        $this->branchRepository = $branchRepository;
+        $this->departmentRepository = $departmentRepository;
     }
 
     public function index()
     {
-        $this->setPageTitle('Branches', 'Branch List');
+        $this->setPageTitle('Departments', 'Department List');
 
         $data = [
             'tableHeads' => ['SN','name','email','phone','mobile','status','action'],
-            'dataUrl' => 'branches/get-data',
+            'dataUrl' => 'departments/get-data',
             'columns' => [
                 ['data' => 'id', 'name' => 'id'],
                 ['data' => 'name', 'name' => 'name'],
@@ -35,71 +35,71 @@ class BranchController extends BaseController
             ],
         ];
 
-        return view('matrixusermanagement::branches.index', $data);
+        return view('matrixusermanagement::departments.index', $data);
     }
 
     public function getData(Request $request)
     {
-        return $this->branchRepository->branchList($request);
+        return $this->departmentRepository->departmentList($request);
     }
 
     public function create()
     {
-        $this->setPageTitle('Branches', 'Create Branch');
+        $this->setPageTitle('Departments', 'Create Department');
 
-        return view('matrixusermanagement::branches.create');
+        return view('matrixusermanagement::departments.create');
     }
 
-    public function store(BranchStoreFormRequest $request)
+    public function store(DepartmentStoreFormRequest $request)
     {
         $params = $request->except('_token');
 
-        $branch = $this->branchRepository->createBranch($params);
+        $department = $this->departmentRepository->createDepartment($params);
 
-        if (!$branch) {
-            return $this->responseRedirectBack('Branch create error', 'error', true, true);
+        if (!$department) {
+            return $this->responseRedirectBack('Department create error', 'error', true, true);
         }
-        return $this->responseRedirect('branches.index', 'Branch create success', 'success', false, false);
+        return $this->responseRedirect('departments.index', 'Department create success', 'success', false, false);
     }
 
     public function edit($id)
     {
-        $branch = $this->branchRepository->findBranchById($id);
+        $department = $this->departmentRepository->findDepartmentById($id);
 
-        $this->setPageTitle('Branches', 'Edit Branch');
-        return view('matrixusermanagement::branches.edit', compact('branch'));
+        $this->setPageTitle('Departments', 'Edit Department');
+        return view('matrixusermanagement::departments.edit', compact('department'));
     }
 
-    public function update(BranchUpdateFormRequest $request, SysBranch $sysBranchModel)
+    public function update(DepartmentUpdateFormRequest $request, SysDepartment $sysDepartmentModel)
     {
         $params = $request->except('_token');
 
-        $branch = $this->branchRepository->updateBranch($params);
+        $department = $this->departmentRepository->updateDepartment($params);
 
-        if (!$branch) {
-            return $this->responseRedirectBack('Branch update error', 'error', true, true);
+        if (!$department) {
+            return $this->responseRedirectBack('Department update error', 'error', true, true);
         }
-        return $this->responseRedirect('branches.index', 'Branch update success', 'success', false, false);
+        return $this->responseRedirect('departments.index', 'Department update success', 'success', false, false);
     }
 
     public function destroy(Request $request, $id)
     {
         $params = $request->except('_token');
-        $branch = $this->branchRepository->deleteBranch($id, $params);
+        $department = $this->departmentRepository->deleteDepartment($id, $params);
 
-        if (!$branch) {
-            return $this->responseRedirectBack('Branch delete error', 'error', true, true);
+        if (!$department) {
+            return $this->responseRedirectBack('Department delete error', 'error', true, true);
         }
-        return $this->responseRedirect('branches.index', 'Branch delete success' ,'success',false, false);
+        return $this->responseRedirect('departments.index', 'Department delete success' ,'success',false, false);
     }
 
     public function restore()
     {
-        $branches = $this->branchRepository->restore();
+        $departments = $this->departmentRepository->restore();
 
-        if (!$branches) {
-            return $this->responseRedirectBack(trans('branch.restore_error'), 'error', true, true);
+        if (!$departments) {
+            return $this->responseRedirectBack(trans('department.restore_error'), 'error', true, true);
         }
-        return $this->responseRedirect('branches.index', trans('branch.restore_success') ,'success',false, false);
+        return $this->responseRedirect('departments.index', trans('department.restore_success') ,'success',false, false);
     }
 }

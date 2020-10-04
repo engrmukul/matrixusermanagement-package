@@ -14,33 +14,21 @@
                 </div>
                 <div class="ibox-content">
                     <!---FORM--->
-                    <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.update', $department->id )}}">
+                    <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.update', $designation->id )}}">
                         @method('PUT')
                         @csrf
                         <!---Name--->
                         <div class="form-group">
                             <label for="name" class="font-bold">Name<span class="text-danger">*</span></label>
-                            <input type="hidden" name="id" value="{{ $department->id }}">
-                            <input type="text" name="name" value="{{ old('name', $department->name) }}" placeholder="Enter name" maxlength="100" class="form-control" required>
+                            <input type="hidden" name="id" value="{{ $designation->id }}">
+                            <input type="text" name="name" value="{{ old('name', $designation->name) }}" placeholder="Enter name" maxlength="200" class="form-control" required>
                             <span class="form-text m-b-none text-danger"> @error('name') {{ $message }} @enderror </span>
                         </div>
-                        <!---Email--->
+                        <!---Short Name--->
                         <div class="form-group">
-                            <label for="name" class="font-bold">Email<span class="text-danger">*</span></label>
-                            <input type="text" name="email" value="{{ old('email', $department->email) }}" placeholder="Enter email" maxlength="50" class="form-control" required>
-                            <span class="form-text m-b-none text-danger"> @error('email') {{ $message }} @enderror </span>
-                        </div>
-                        <!---Phone--->
-                        <div class="form-group">
-                            <label for="mobile" class="font-bold">Phone<span class="text-danger">*</span></label>
-                            <input type="text" name="phone" value="{{ old('phone', $department->phone) }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
-                            <span class="form-text m-b-none text-danger"> @error('phone') {{ $message }} @enderror </span>
-                        </div>
-                        <!---Phone--->
-                        <div class="form-group">
-                            <label for="mobile" class="font-bold">Mobile<span class="text-danger">*</span></label>
-                            <input type="text" name="mobile" value="{{ old('mobile', $department->mobile) }}" maxlength="11" placeholder="Enter mobile" class="form-control" required>
-                            <span class="form-text m-b-none text-danger"> @error('phone') {{ $message }} @enderror </span>
+                            <label for="short_name" class="font-bold">Short Name<span class="text-danger">*</span></label>
+                            <input type="text" name="short_name" value="{{ old('short_name', $designation->short_name) }}" placeholder="Enter short name" maxlength="50" class="form-control" required>
+                            <span class="form-text m-b-none text-danger"> @error('short_name') {{ $message }} @enderror </span>
                         </div>
                         <!---{{ $pageTitle }} CONTROL BUTTON--->
                         <div class="form-group row">

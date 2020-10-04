@@ -20,9 +20,10 @@ class CreateSysMenusTable extends Migration
             $table->string('name',100);
             $table->text('description');
             $table->enum('menu_type', ['Main','Sub'])->default('Main');
-            $table->unsignedBigInteger('parent_id');
-            $table->foreign('parent_id')->references('id')->on('sys_menus')->onDelete('cascade');
-            $table->unsignedBigInteger('sys_module_id');
+            //$table->unsignedBigInteger('parent_id')->default(0);
+            $table->smallInteger('parent_id')->autoIncrement(false);
+            //$table->foreign('parent_id')->references('id')->on('sys_menus')->onDelete('cascade');
+            //$table->unsignedBigInteger('sys_module_id');
             $table->foreign('sys_module_id')->references('id')->on('sys_modules')->onDelete('cascade');
             $table->string('icon',100);
             $table->string('menu_url',150);

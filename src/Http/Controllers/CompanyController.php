@@ -8,7 +8,7 @@ use Mukul\Matrixusermanagement\Contracts\CompanyContract;
 use Mukul\Matrixusermanagement\Http\Requests\CompanyStoreFormRequest;
 use Mukul\Matrixusermanagement\Http\Requests\CompanyUpdateFormRequest;
 
-class CompanyController extends BaseController
+class BranchController extends BaseController
 {
     protected $companyRepository;
 
@@ -22,7 +22,7 @@ class CompanyController extends BaseController
         $this->setPageTitle('Companies', 'Company List');
 
         $data = [
-            'tableHeads' => ['SN','name','email','phone','mobile','status','action'],
+            'tableHeads' => ['SN','name','email','phone','status','action'],
             'dataUrl' => 'companies/get-data',
             'columns' => [
                 ['data' => 'id', 'name' => 'id'],
@@ -56,9 +56,9 @@ class CompanyController extends BaseController
         $company = $this->companyRepository->createCompany($params);
 
         if (!$company) {
-            return $this->responseRedirectBack(trans('company.create_error'), 'error', true, true);
+            return $this->responseRedirectBack('Company create error', 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', trans('company.create_success'), 'success', false, false);
+        return $this->responseRedirect('companies.index', 'Company create success', 'success', false, false);
     }
 
     public function edit($id)
@@ -66,7 +66,7 @@ class CompanyController extends BaseController
         $company = $this->companyRepository->findCompanyById($id);
 
         $this->setPageTitle('Companies', 'Edit Company');
-        return view('companies.edit', compact('company'));
+        return view('matrixusermanagement::companies.edit', compact('company'));
     }
 
     public function update(CompanyUpdateFormRequest $request, SysCompany $sysCompanyModel)
@@ -76,9 +76,9 @@ class CompanyController extends BaseController
         $company = $this->companyRepository->updateCompany($params);
 
         if (!$company) {
-            return $this->responseRedirectBack(trans('company.update_error'), 'error', true, true);
+            return $this->responseRedirectBack('Company update error', 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', trans('company.update_success'), 'success', false, false);
+        return $this->responseRedirect('companies.index', 'Company update success', 'success', false, false);
     }
 
     public function destroy(Request $request, $id)
@@ -87,9 +87,9 @@ class CompanyController extends BaseController
         $company = $this->companyRepository->deleteCompany($id, $params);
 
         if (!$company) {
-            return $this->responseRedirectBack(trans('company.delete_error'), 'error', true, true);
+            return $this->responseRedirectBack('Company delete error', 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', trans('company.delete_success') ,'success',false, false);
+        return $this->responseRedirect('companies.index', 'Company delete success' ,'success',false, false);
     }
 
     public function restore()

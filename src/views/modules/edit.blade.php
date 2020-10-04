@@ -15,40 +15,35 @@
                     </div>
                     <div class="ibox-content">
                         <!---FORM--->
-                        <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.update', $company->id )}}">
+                        <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.update', $module->id )}}">
                             @method('PUT')
                             @csrf
                             <!---Name--->
                             <div class="form-group">
                                 <label for="name" class="font-bold">Name<span class="text-danger">*</span></label>
-                                <input type="hidden" name="id" value="{{ $company->id }}">
-                                <input type="text" name="name" value="{{ old('name', $company->name) }}" placeholder="Enter name" maxlength="100" class="form-control" required>
+                                <input type="hidden" name="id" value="{{ $module->id }}">
+                                <input type="text" name="name" value="{{ old('name', $module->name) }}" placeholder="Enter name" maxlength="100" class="form-control" required>
                                 <span class="form-text m-b-none text-danger"> @error('name') {{ $message }} @enderror </span>
                             </div>
-                            <!---Email--->
-                            <div class="form-group">
-                                <label for="name" class="font-bold">Email<span class="text-danger">*</span></label>
-                                <input type="text" name="email" value="{{ old('email', $company->email) }}" placeholder="Enter email" maxlength="50" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('email') {{ $message }} @enderror </span>
-                            </div>
-                            <!---Phone--->
-                            <div class="form-group">
-                                <label for="mobile" class="font-bold">Phone<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" value="{{ old('phone', $company->phone) }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('phone') {{ $message }} @enderror </span>
-                            </div>
-                            <!---Phone--->
-                            <div class="form-group">
-                                <label for="website" class="font-bold">Website<span class="text-danger">*</span></label>
-                                <input type="text" name="website" value="{{ old('website', $company->website) }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('website') {{ $message }} @enderror </span>
-                            </div>
-                            <!---Address--->
-                            <div class="form-group">
-                                <label for="address" class="font-bold">Address</label>
-                                <textarea name="address" class="form-control">{{ old('address', $company->address) }}</textarea>
-                                <span class="form-text m-b-none text-danger"> @error('address') {{ $message }} @enderror </span>
-                            </div>
+                                <!---icon--->
+                                <div class="form-group">
+                                    <label for="icon" class="font-bold">Icon<span class="text-danger">*</span></label>
+                                    <input type="text" name="icon" value="{{ old('icon', $module->icon) }}" placeholder="Enter icon" maxlength="50" class="form-control" required>
+                                    <span class="form-text m-b-none text-danger"> @error('icon') {{ $message }} @enderror </span>
+                                </div>
+                                <!---Home Url--->
+                                <div class="form-group">
+                                    <label for="home_url" class="font-bold">Home Url<span class="text-danger">*</span></label>
+                                    <input type="text" name="home_url" value="{{ old('home_url', $module->home_url) }}" placeholder="Enter home url" class="form-control" required>
+                                    <span class="form-text m-b-none text-danger"> @error('home_url') {{ $message }} @enderror </span>
+                                </div>
+
+                                <!---Description--->
+                                <div class="form-group">
+                                    <label for="description" class="font-bold">Description</label>
+                                    <textarea name="description" class="form-control">{{ old('description', $module->description) }}</textarea>
+                                    <span class="form-text m-b-none text-danger"> @error('description') {{ $message }} @enderror </span>
+                                </div>
                             <!---{{ $pageTitle }} CONTROL BUTTON--->
                             <div class="form-group row">
                                 <div class="col-sm-4 col-sm-offset-2">

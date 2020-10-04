@@ -26,7 +26,7 @@ class BranchStoreFormRequest extends FormRequest
     {
         if ($this->request->has('name')){
             $name = $this->name;
-            $companyId = auth()->user()-> company_id;
+            $companyId = 3;//auth()->user()-> company_id;
         }
 
         return [
@@ -37,9 +37,10 @@ class BranchStoreFormRequest extends FormRequest
                     return $query->where('company_id', $companyId)->where('name', $name);
                 }),
             ],
-            'email'    =>  'required||max:50',
-            'phone'    =>  'required||max:14',
+            'email'    =>  'required|max:50',
+            'phone'    =>  'required|max:14',
             'mobile'    =>  'required|max:14',
+            'address'    =>  'required',
         ];
     }
 }

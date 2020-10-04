@@ -19,7 +19,6 @@ class CreateSysModulesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',100);
             $table->string('icon',100);
-            $table->string('module_lang',100);
             $table->text('description');
             $table->string('home_url',100);
             $this->commonColumns($table);

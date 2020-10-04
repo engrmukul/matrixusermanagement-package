@@ -41,13 +41,6 @@
                                 <input type="text" name="mobile" value="{{ old('mobile') }}" maxlength="11" placeholder="Enter mobile" class="form-control" required>
                                 <span class="form-text m-b-none text-danger"> @error('mobile') {{ $message }} @enderror </span>
                             </div>
-
-                            <!---Address--->
-                            <div class="form-group">
-                                <label for="address" class="font-bold">Address</label>
-                                <textarea name="address" class="form-control" required></textarea>
-                                <span class="form-text m-b-none text-danger"> @error('address') {{ $message }} @enderror </span>
-                            </div>
                             <!---CONTROL BUTTON--->
                             <div class="form-group row">
                                 <div class="col-sm-4 col-sm-offset-2">

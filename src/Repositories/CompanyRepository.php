@@ -30,18 +30,17 @@ class CompanyRepository extends BaseRepository implements CompanyContract
     public function companyList(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
     {
         $query = $this->all();
-        //$query = $this->companyWiseAllData();
         return Datatables::of($query)
             ->addColumn('action', function ($row) {
                 $actions = '';
 
-                $actions .= '<a class="btn btn-primary btn-xs float-left mr-1" href="' . route('companies.edit', [$row->id]) . '" title="Company Edit"><i class="fa fa-pencil"></i>' . trans("common.edit") . '</a>';
+                $actions .= '<a class="btn btn-primary btn-xs float-left mr-1" href="' . route('companies.edit', [$row->id]) . '" title="Company Edit"><i class="fa fa-pencil"></i> Edit</a>';
 
                 $actions .= '
                     <form action="' . route('companies.destroy', [$row->id]) . '" method="POST">
                         <input type="hidden" name="_method" value="delete">
                         <input type="hidden" name="_token" value="' . csrf_token() . '">
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i> ' . trans("common.delete") . '</button>
+                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i> Delete</button>
                     </form>
                 ';
 
@@ -96,7 +95,7 @@ class CompanyRepository extends BaseRepository implements CompanyContract
      */
     public function updateCompany(array $params)
     {
-        $company = $this->findById($params['id']);
+        $company = $this->findCompanyById($params['id']);
 
         $collection = collect($params)->except('_token');
 

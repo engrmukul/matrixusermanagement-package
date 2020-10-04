@@ -5,7 +5,7 @@ namespace Mukul\Matrixusermanagement\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class DepartmentUpdateFormRequest extends FormRequest
+class DesignationUpdateFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,19 +27,17 @@ class DepartmentUpdateFormRequest extends FormRequest
         if ($this->request->has('name')){
             $name = $this->name;
             $companyId = 3;//auth()->user()->company_id;
-            $branchId = $this->id;
+            $designationId = $this->id;
         }
 
         return [
             'name' => [
                 'required',
-                Rule::unique('sys_departments')->where(function ($query) use($companyId, $name, $branchId) {
-                    return $query->where('company_id', $companyId)->where('name', $name)->where('id', '<>', $branchId);
+                Rule::unique('sys_departments')->where(function ($query) use($companyId, $name, $designationId) {
+                    return $query->where('company_id', $companyId)->where('name', $name)->where('id', '<>', $designationId);
                 }),
             ],
-            'email'    =>  'required|max:50',
-            'phone'    =>  'required|max:14',
-            'mobile'    =>  'required|max:14',
+            'short_name'    =>  'required|max:50',
         ];
     }
 }

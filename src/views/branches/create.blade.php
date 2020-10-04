@@ -2,8 +2,7 @@
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
     @include('matrixusermanagement::partials.flash')
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
+    <div class="row">
             <div class="col-lg-12">
                 <div class="ibox ">
                     <div class="ibox-title">
@@ -16,7 +15,7 @@
 
                     <div class="ibox-content">
                         <!---FORM--->
-                        <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.store')}}">
+                        <form role="forBm" method="post" action="{{route( strtolower($pageTitle) . '.store')}}">
                             @csrf
                             <!---Name--->
                             <div class="form-group">
@@ -36,17 +35,17 @@
                                 <input type="text" name="phone" value="{{ old('phone') }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
                                 <span class="form-text m-b-none text-danger"> @error('phone') {{ $message }} @enderror </span>
                             </div>
-                            <!---Website--->
+                            <!---Mobile--->
                             <div class="form-group">
-                                <label for="website" class="font-bold">Website<span class="text-danger">*</span></label>
-                                <input type="text" name="website" value="{{ old('website') }}" maxlength="11" placeholder="Enter website" class="form-control" required>
+                                <label for="mobile" class="font-bold">Mobile<span class="text-danger">*</span></label>
+                                <input type="text" name="mobile" value="{{ old('mobile') }}" maxlength="11" placeholder="Enter mobile" class="form-control" required>
                                 <span class="form-text m-b-none text-danger"> @error('mobile') {{ $message }} @enderror </span>
                             </div>
 
                             <!---Address--->
                             <div class="form-group">
                                 <label for="address" class="font-bold">Address</label>
-                                <textarea name="address" class="form-control"></textarea>
+                                <textarea name="address" class="form-control" required></textarea>
                                 <span class="form-text m-b-none text-danger"> @error('address') {{ $message }} @enderror </span>
                             </div>
                             <!---CONTROL BUTTON--->
@@ -61,5 +60,4 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection

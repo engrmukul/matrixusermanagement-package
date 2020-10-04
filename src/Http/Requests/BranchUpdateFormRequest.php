@@ -26,20 +26,21 @@ class BranchUpdateFormRequest extends FormRequest
     {
         if ($this->request->has('name')){
             $name = $this->name;
-            $companyId = auth()->user()->company_id;
+            $companyId = 3;//auth()->user()->company_id;
             $branchId = $this->id;
         }
 
         return [
             'name' => [
                 'required',
-                Rule::unique('branches')->where(function ($query) use($companyId, $name, $branchId) {
+                Rule::unique('sys_branches')->where(function ($query) use($companyId, $name, $branchId) {
                     return $query->where('company_id', $companyId)->where('name', $name)->where('id', '<>', $branchId);
                 }),
             ],
-            'email'    =>  'required',
-            'phone'    =>  'required',
-            'mobile'    =>  'required',
+            'email'    =>  'required|max:50',
+            'phone'    =>  'required|max:14',
+            'mobile'    =>  'required|max:14',
+            'address'    =>  'required',
         ];
     }
 }

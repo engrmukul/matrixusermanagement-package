@@ -2,103 +2,104 @@
 
 namespace Mukul\Matrixusermanagement\Http\Controllers;
 
-use  Mukul\Matrixusermanagement\Models\SysCompany;
+use  Mukul\Matrixusermanagement\Models\SysBranch;
 use Illuminate\Http\Request;
-use Mukul\Matrixusermanagement\Contracts\CompanyContract;
-use Mukul\Matrixusermanagement\Http\Requests\CompanyStoreFormRequest;
-use Mukul\Matrixusermanagement\Http\Requests\CompanyUpdateFormRequest;
+use Mukul\Matrixusermanagement\Contracts\BranchContract;
+use Mukul\Matrixusermanagement\Http\Requests\BranchStoreFormRequest;
+use Mukul\Matrixusermanagement\Http\Requests\BranchUpdateFormRequest;
 
-class CompanyController extends BaseController
+class BranchController extends BaseController
 {
-    protected $companyRepository;
+    protected $branchRepository;
 
-    public function __construct(CompanyContract $companyRepository)
+    public function __construct(BranchContract $branchRepository)
     {
-        $this->companyRepository = $companyRepository;
+        $this->branchRepository = $branchRepository;
     }
 
     public function index()
     {
-        $this->setPageTitle('Companies', 'Company List');
+        $this->setPageTitle('Branches', 'Branch List');
 
         $data = [
-            'tableHeads' => ['SN','name','email','phone','status','action'],
-            'dataUrl' => 'companies/get-data',
+            'tableHeads' => ['SN','name','email','phone','mobile','status','action'],
+            'dataUrl' => 'branches/get-data',
             'columns' => [
                 ['data' => 'id', 'name' => 'id'],
                 ['data' => 'name', 'name' => 'name'],
                 ['data' => 'email', 'name' => 'email'],
                 ['data' => 'phone', 'name' => 'phone'],
+                ['data' => 'mobile', 'name' => 'mobile'],
                 ['data' => 'status', 'name' => 'status'],
                 ['data' => 'action', 'name' => 'action', 'orderable' => false]
             ],
         ];
 
-        return view('matrixusermanagement::companies.index', $data);
+        return view('matrixusermanagement::branches.index', $data);
     }
 
     public function getData(Request $request)
     {
-        return $this->companyRepository->companyList($request);
+        return $this->branchRepository->branchList($request);
     }
 
     public function create()
     {
-        $this->setPageTitle('Companies', 'Create Company');
+        $this->setPageTitle('Branches', 'Create Branch');
 
-        return view('matrixusermanagement::companies.create');
+        return view('matrixusermanagement::branches.create');
     }
 
-    public function store(CompanyStoreFormRequest $request)
+    public function store(BranchStoreFormRequest $request)
     {
         $params = $request->except('_token');
 
-        $company = $this->companyRepository->createCompany($params);
+        $branch = $this->branchRepository->createBranch($params);
 
-        if (!$company) {
-            return $this->responseRedirectBack('Company create error', 'error', true, true);
+        if (!$branch) {
+            return $this->responseRedirectBack('Branch create error', 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', 'Company create success', 'success', false, false);
+        return $this->responseRedirect('branches.index', 'Branch create success', 'success', false, false);
     }
 
     public function edit($id)
     {
-        $company = $this->companyRepository->findCompanyById($id);
+        $branch = $this->branchRepository->findBranchById($id);
 
-        $this->setPageTitle('Companies', 'Edit Company');
-        return view('matrixusermanagement::companies.edit', compact('company'));
+        $this->setPageTitle('Branches', 'Edit Branch');
+        return view('matrixusermanagement::branches.edit', compact('branch'));
     }
 
-    public function update(CompanyUpdateFormRequest $request, SysCompany $sysCompanyModel)
+    public function update(BranchUpdateFormRequest $request, SysBranch $sysBranchModel)
     {
         $params = $request->except('_token');
 
-        $company = $this->companyRepository->updateCompany($params);
+        $branch = $this->branchRepository->updateBranch($params);
 
-        if (!$company) {
-            return $this->responseRedirectBack('Company update error', 'error', true, true);
+        if (!$branch) {
+            return $this->responseRedirectBack('Branch update error', 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', 'Company update success', 'success', false, false);
+        return $this->responseRedirect('branches.index', 'Branch update success', 'success', false, false);
     }
 
     public function destroy(Request $request, $id)
     {
         $params = $request->except('_token');
-        $company = $this->companyRepository->deleteCompany($id, $params);
+        $branch = $this->branchRepository->deleteBranch($id, $params);
 
-        if (!$company) {
-            return $this->responseRedirectBack('Company delete error', 'error', true, true);
+        if (!$branch) {
+            return $this->responseRedirectBack('Branch delete error', 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', 'Company delete success' ,'success',false, false);
+        return $this->responseRedirect('branches.index', 'Branch delete success' ,'success',false, false);
     }
 
     public function restore()
     {
-        $companies = $this->companyRepository->restore();
+        $branches = $this->branchRepository->restore();
 
-        if (!$companies) {
-            return $this->responseRedirectBack(trans('company.restore_error'), 'error', true, true);
+        if (!$branches) {
+            return $this->responseRedirectBack(trans('branch.restore_error'), 'error', true, true);
         }
-        return $this->responseRedirect('companies.index', trans('company.restore_success') ,'success',false, false);
+        return $this->responseRedirect('branches.index', trans('branch.restore_success') ,'success',false, false);
     }
 }

@@ -5,7 +5,7 @@ namespace Mukul\Matrixusermanagement\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class DepartmentStoreFormRequest extends FormRequest
+class DesignationStoreFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,13 +33,11 @@ class DepartmentStoreFormRequest extends FormRequest
             'name' => [
                 'required',
                 'max:200',
-                Rule::unique('sys_departments')->where(function ($query) use($companyId, $name) {
+                Rule::unique('sys_designations')->where(function ($query) use($companyId, $name) {
                     return $query->where('company_id', $companyId)->where('name', $name);
                 }),
             ],
-            'email'    =>  'required|max:50',
-            'phone'    =>  'required|max:14',
-            'mobile'    =>  'required|max:14',
+            'short_name'    =>  'required|max:50',
         ];
     }
 }

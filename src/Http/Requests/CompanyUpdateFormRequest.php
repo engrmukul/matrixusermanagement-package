@@ -28,13 +28,12 @@ class CompanyUpdateFormRequest extends FormRequest
             'name'      =>  'required|max:100',
             'phone' => [
                 'required',
-                'max:14',
-                Rule::unique('companies', 'mobile')->ignore($this->company)
+                Rule::unique('sys_companies', 'phone')->ignore($this->company)
             ],
             'email' => [
                 'required',
                 'max:50',
-                Rule::unique('companies', 'email')->ignore($this->company)
+                Rule::unique('sys_companies', 'email')->ignore($this->company)
             ]
         ];
     }

@@ -3,11 +3,13 @@
 
 namespace Mukul\Matrixusermanagement\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
+use TypiCMS\NestableTrait;
 
 class SysMenu extends Model
 {
+    use NestableTrait;
+
     protected $fillable = [
         'name',
         'description',

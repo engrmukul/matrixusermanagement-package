@@ -34,13 +34,13 @@ class DesignationRepository extends BaseRepository implements DesignationContrac
             ->addColumn('action', function ($row) {
                 $actions = '';
 
-                $actions .= '<a class="btn btn-primary btn-xs float-left mr-1" href="' . route('designations.edit', [$row->id]) . '" title="Designation Edit"><i class="fa fa-pencil"></i>' . trans("common.edit") . '</a>';
+                $actions .= '<a class="btn btn-primary btn-xs float-left mr-1" href="' . route('designations.edit', [$row->id]) . '" title="Designation Edit"><i class="fa fa-pencil"></i> Edit</a>';
 
                 $actions .= '
                     <form action="' . route('designations.destroy', [$row->id]) . '" method="POST">
                         <input type="hidden" name="_method" value="delete">
                         <input type="hidden" name="_token" value="' . csrf_token() . '">
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i> ' . trans("common.delete") . '</button>
+                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i> Delete</button>
                     </form>
                 ';
 
@@ -74,9 +74,9 @@ class DesignationRepository extends BaseRepository implements DesignationContrac
         try {
             $collection = collect($params);
 
-            $created_by = auth()->user()->id;
+            $created_by = 1;//auth()->user()->id;
 
-            $company_id = auth()->user()->company_id;
+            $company_id = 3;//auth()->user()->company_id;
 
             $merge = $collection->merge(compact('created_by', 'company_id'));
 
@@ -97,11 +97,11 @@ class DesignationRepository extends BaseRepository implements DesignationContrac
      */
     public function updateDesignation(array $params)
     {
-        $designation = $this->findById($params['id']);
+        $designation = $this->findDesignationById($params['id']);
 
         $collection = collect($params)->except('_token');
 
-        $updated_by = auth()->user()->id;
+        $updated_by = 1;//auth()->user()->id;
 
         $merge = $collection->merge(compact('updated_by'));
 
@@ -122,7 +122,7 @@ class DesignationRepository extends BaseRepository implements DesignationContrac
 
         $collection = collect($params)->except('_token');
 
-        $deleted_by = auth()->user()->id;
+        $deleted_by = 1;//auth()->user()->id;
 
         $merge = $collection->merge(compact('deleted_by'));
 

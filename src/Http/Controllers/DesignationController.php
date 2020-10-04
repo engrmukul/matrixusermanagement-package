@@ -2,104 +2,102 @@
 
 namespace Mukul\Matrixusermanagement\Http\Controllers;
 
-use  Mukul\Matrixusermanagement\Models\SysDepartment;
+use  Mukul\Matrixusermanagement\Models\SysDesignation;
 use Illuminate\Http\Request;
-use Mukul\Matrixusermanagement\Contracts\DepartmentContract;
-use Mukul\Matrixusermanagement\Http\Requests\DepartmentStoreFormRequest;
-use Mukul\Matrixusermanagement\Http\Requests\DepartmentUpdateFormRequest;
+use Mukul\Matrixusermanagement\Contracts\DesignationContract;
+use Mukul\Matrixusermanagement\Http\Requests\DesignationStoreFormRequest;
+use Mukul\Matrixusermanagement\Http\Requests\DesignationUpdateFormRequest;
 
-class DepartmentController extends BaseController
+class DesignationController extends BaseController
 {
-    protected $departmentRepository;
+    protected $designationRepository;
 
-    public function __construct(DepartmentContract $departmentRepository)
+    public function __construct(DesignationContract $designationRepository)
     {
-        $this->departmentRepository = $departmentRepository;
+        $this->designationRepository = $designationRepository;
     }
 
     public function index()
     {
-        $this->setPageTitle('Departments', 'Department List');
+        $this->setPageTitle('Designations', 'Designation List');
 
         $data = [
-            'tableHeads' => ['SN','name','email','phone','mobile','status','action'],
-            'dataUrl' => 'departments/get-data',
+            'tableHeads' => ['SN','name','short_name','status','action'],
+            'dataUrl' => 'designations/get-data',
             'columns' => [
                 ['data' => 'id', 'name' => 'id'],
                 ['data' => 'name', 'name' => 'name'],
-                ['data' => 'email', 'name' => 'email'],
-                ['data' => 'phone', 'name' => 'phone'],
-                ['data' => 'mobile', 'name' => 'mobile'],
+                ['data' => 'short_name', 'name' => 'short_name'],
                 ['data' => 'status', 'name' => 'status'],
                 ['data' => 'action', 'name' => 'action', 'orderable' => false]
             ],
         ];
 
-        return view('matrixusermanagement::departments.index', $data);
+        return view('matrixusermanagement::designations.index', $data);
     }
 
     public function getData(Request $request)
     {
-        return $this->departmentRepository->departmentList($request);
+        return $this->designationRepository->designationList($request);
     }
 
     public function create()
     {
-        $this->setPageTitle('Departments', 'Create Department');
+        $this->setPageTitle('Designations', 'Create Designation');
 
-        return view('matrixusermanagement::departments.create');
+        return view('matrixusermanagement::designations.create');
     }
 
-    public function store(DepartmentStoreFormRequest $request)
+    public function store(DesignationStoreFormRequest $request)
     {
         $params = $request->except('_token');
 
-        $department = $this->departmentRepository->createDepartment($params);
+        $designation = $this->designationRepository->createDesignation($params);
 
-        if (!$department) {
-            return $this->responseRedirectBack('Department create error', 'error', true, true);
+        if (!$designation) {
+            return $this->responseRedirectBack('Designation create error', 'error', true, true);
         }
-        return $this->responseRedirect('departments.index', 'Department create success', 'success', false, false);
+        return $this->responseRedirect('designations.index', 'Designation create success', 'success', false, false);
     }
 
     public function edit($id)
     {
-        $department = $this->departmentRepository->findDepartmentById($id);
+        $designation = $this->designationRepository->findDesignationById($id);
 
-        $this->setPageTitle('Departments', 'Edit Department');
-        return view('matrixusermanagement::departments.edit', compact('department'));
+        $this->setPageTitle('Designations', 'Edit Designation');
+        return view('matrixusermanagement::designations.edit', compact('designation'));
     }
 
-    public function update(DepartmentUpdateFormRequest $request, SysDepartment $sysDepartmentModel)
+    public function update(DesignationUpdateFormRequest $request, SysDesignation $sysDesignationModel)
     {
         $params = $request->except('_token');
 
-        $department = $this->departmentRepository->updateDepartment($params);
+        $designation = $this->designationRepository->updateDesignation($params);
 
-        if (!$department) {
-            return $this->responseRedirectBack('Department update error', 'error', true, true);
+        if (!$designation) {
+            return $this->responseRedirectBack('Designation update error', 'error', true, true);
         }
-        return $this->responseRedirect('departments.index', 'Department update success', 'success', false, false);
+        return $this->responseRedirect('designations.index', 'Designation update success', 'success', false, false);
     }
 
     public function destroy(Request $request, $id)
     {
         $params = $request->except('_token');
-        $department = $this->departmentRepository->deleteDepartment($id, $params);
+        $designation = $this->designationRepository->deleteDesignation($id, $params);
 
-        if (!$department) {
-            return $this->responseRedirectBack('Department delete error', 'error', true, true);
+        if (!$designation) {
+            return $this->responseRedirectBack('Designation delete error', 'error', true, true);
         }
-        return $this->responseRedirect('departments.index', 'Department delete success' ,'success',false, false);
+        return $this->responseRedirect('designations.index', 'Designation delete success' ,'success',false, false);
     }
 
     public function restore()
     {
-        $departments = $this->departmentRepository->restore();
+        $designations = $this->designationRepository->restore();
 
-        if (!$departments) {
-            return $this->responseRedirectBack(trans('department.restore_error'), 'error', true, true);
+        if (!$designations) {
+            return $this->responseRedirectBack(trans('designation.restore_error'), 'error', true, true);
         }
-        return $this->responseRedirect('departments.index', trans('department.restore_success') ,'success',false, false);
+        return $this->responseRedirect('designations.index', trans('designation.restore_success') ,'success',false, false);
     }
 }

@@ -2,13 +2,28 @@
 namespace Mukul\Matrixusermanagement;
 
 use Illuminate\Support\ServiceProvider;
+use Mukul\Matrixusermanagement\Contracts\BranchContract;
 use Mukul\Matrixusermanagement\Contracts\CompanyContract;
+use Mukul\Matrixusermanagement\Contracts\DepartmentContract;
+use Mukul\Matrixusermanagement\Contracts\DesignationContract;
+use Mukul\Matrixusermanagement\Contracts\MenuContract;
+use Mukul\Matrixusermanagement\Contracts\ModuleContract;
+use Mukul\Matrixusermanagement\Repositories\BranchRepository;
 use Mukul\Matrixusermanagement\Repositories\CompanyRepository;
+use Mukul\Matrixusermanagement\Repositories\DepartmentRepository;
+use Mukul\Matrixusermanagement\Repositories\DesignationRepository;
+use Mukul\Matrixusermanagement\Repositories\MenuRepository;
+use Mukul\Matrixusermanagement\Repositories\ModuleRepository;
 
 class MatrixUserManagementServiceProvider extends ServiceProvider
 {
     protected $repositories = [
         CompanyContract::class => CompanyRepository::class,
+        BranchContract::class => BranchRepository::class,
+        DepartmentContract::class => DepartmentRepository::class,
+        DesignationContract::class => DesignationRepository::class,
+        ModuleContract::class => ModuleRepository::class,
+        MenuContract::class => MenuRepository::class,
     ];
 
     public function boot()

@@ -24,30 +24,24 @@
                                 <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter name" maxlength="100" class="form-control" required>
                                 <span class="form-text m-b-none text-danger"> @error('name') {{ $message }} @enderror </span>
                             </div>
-                            <!---Email--->
+                            <!---icon--->
                             <div class="form-group">
-                                <label for="email" class="font-bold">Email<span class="text-danger">*</span></label>
-                                <input type="text" name="email" value="{{ old('email') }}" placeholder="Enter email" maxlength="50" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('email') {{ $message }} @enderror </span>
+                                <label for="icon" class="font-bold">Icon<span class="text-danger">*</span></label>
+                                <input type="text" name="icon" value="{{ old('icon') }}" placeholder="Enter icon" maxlength="50" class="form-control" required>
+                                <span class="form-text m-b-none text-danger"> @error('icon') {{ $message }} @enderror </span>
                             </div>
-                            <!---Phone--->
+                            <!---Home Url--->
                             <div class="form-group">
-                                <label for="mobile" class="font-bold">Phone<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" value="{{ old('phone') }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('phone') {{ $message }} @enderror </span>
-                            </div>
-                            <!---Website--->
-                            <div class="form-group">
-                                <label for="website" class="font-bold">Website<span class="text-danger">*</span></label>
-                                <input type="text" name="website" value="{{ old('website') }}" maxlength="11" placeholder="Enter website" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('mobile') {{ $message }} @enderror </span>
+                                <label for="home_url" class="font-bold">Home Url<span class="text-danger">*</span></label>
+                                <input type="text" name="home_url" value="{{ old('home_url') }}" placeholder="Enter home url" class="form-control" required>
+                                <span class="form-text m-b-none text-danger"> @error('home_url') {{ $message }} @enderror </span>
                             </div>
 
-                            <!---Address--->
+                            <!---Description--->
                             <div class="form-group">
-                                <label for="address" class="font-bold">Address</label>
-                                <textarea name="address" class="form-control"></textarea>
-                                <span class="form-text m-b-none text-danger"> @error('address') {{ $message }} @enderror </span>
+                                <label for="description" class="font-bold">Description</label>
+                                <textarea name="description" class="form-control"></textarea>
+                                <span class="form-text m-b-none text-danger"> @error('description') {{ $message }} @enderror </span>
                             </div>
                             <!---CONTROL BUTTON--->
                             <div class="form-group row">

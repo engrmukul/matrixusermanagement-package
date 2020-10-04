@@ -58,7 +58,8 @@ class BaseRepository implements BaseContract
 
     public function companyWiseAllData($columns = array('*'), string $orderBy = 'id', string $sortBy = 'desc')
     {
-        return $this->model->where('company_id', auth()->user()->company_id )->orderBy($orderBy, $sortBy);
+        //return $this->model->where('company_id', auth()->user()->company_id )->orderBy($orderBy, $sortBy);
+        return $this->model->where('company_id', 3 )->orderBy($orderBy, $sortBy);
     }
 
     /**

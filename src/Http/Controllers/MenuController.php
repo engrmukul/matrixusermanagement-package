@@ -2,6 +2,7 @@
 
 namespace Mukul\Matrixusermanagement\Http\Controllers;
 
+use Mukul\Matrixusermanagement\Contracts\ModuleContract;
 use  Mukul\Matrixusermanagement\Models\SysMenu;
 use Illuminate\Http\Request;
 use Mukul\Matrixusermanagement\Contracts\MenuContract;
@@ -11,10 +12,12 @@ use Mukul\Matrixusermanagement\Http\Requests\MenuUpdateFormRequest;
 class MenuController extends BaseController
 {
     protected $menuRepository;
+    protected $moduleRepository;
 
-    public function __construct(MenuContract $menuRepository)
+    public function __construct(MenuContract $menuRepository, ModuleContract $moduleRepository)
     {
         $this->menuRepository = $menuRepository;
+        $this->moduleRepository = $moduleRepository;
     }
 
     public function index()
@@ -22,7 +25,7 @@ class MenuController extends BaseController
         $this->setPageTitle('Menus', 'Menu List');
 
         $data = [
-            'tableHeads' => ['SN','name','menu_type','parent_id','sys_module_id','icon','module_url','sort_number','status','action'],
+            'tableHeads' => ['SN','name','menu_type','parent_id','sys_module_id','icon','menu_url','sort_number','status','action'],
             'dataUrl' => 'menus/get-data',
             'columns' => [
                 ['data' => 'id', 'name' => 'id'],
@@ -31,7 +34,7 @@ class MenuController extends BaseController
                 ['data' => 'parent_id', 'name' => 'parent_id'],
                 ['data' => 'sys_module_id', 'name' => 'sys_module_id'],
                 ['data' => 'icon', 'name' => 'icon'],
-                ['data' => 'module_url', 'name' => 'module_url'],
+                ['data' => 'menu_url', 'name' => 'menu_url'],
                 ['data' => 'sort_number', 'name' => 'sort_number'],
                 ['data' => 'status', 'name' => 'status'],
                 ['data' => 'action', 'name' => 'action', 'orderable' => false]
@@ -49,8 +52,10 @@ class MenuController extends BaseController
     public function create()
     {
         $this->setPageTitle('Menus', 'Create Menu');
+        $menus = $this->menuRepository->treeList();
+        $modules = $this->moduleRepository->getModuleList();
 
-        return view('matrixusermanagement::menus.create');
+        return view('matrixusermanagement::menus.create', compact('menus', 'modules'));
     }
 
     public function store(MenuStoreFormRequest $request)
@@ -68,9 +73,11 @@ class MenuController extends BaseController
     public function edit($id)
     {
         $menu = $this->menuRepository->findMenuById($id);
+        $menus = $this->menuRepository->treeList();
+        $modules = $this->moduleRepository->getModuleList();
 
         $this->setPageTitle('Menus', 'Edit Menu');
-        return view('matrixusermanagement::menus.edit', compact('menu'));
+        return view('matrixusermanagement::menus.edit', compact('menu','menus', 'modules'));
     }
 
     public function update(MenuUpdateFormRequest $request, SysMenu $sysMenuModel)

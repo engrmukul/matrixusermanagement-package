@@ -26,7 +26,7 @@ class CompanyStoreFormRequest extends FormRequest
     {
         return [
             'name'      =>  'required|max:100',
-            'phone'       =>  'required|max:14|numeric|unique:sys_companies',
+            'phone'       =>  'required|numeric|unique:sys_companies',
             'email'  =>  'email|max:50|unique:sys_companies',
         ];
     }

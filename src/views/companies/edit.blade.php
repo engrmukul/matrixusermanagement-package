@@ -1,7 +1,7 @@
-@extends('app')
+@extends('matrixusermanagement::app')
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
-    @include('partials.flash')
+    @include('matrixusermanagement::partials.flash')
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -10,12 +10,12 @@
                         <h5><i class="fa fa-shopping-bag"></i> {{ $pageTitle }} Update Form</h5>
                         <div class="ibox-tools">
                             <a style="margin-top: -8px;" href="{{ route( strtolower($pageTitle) . '.index') }}" class="btn btn-primary"><i
-                                    class="fa fa-list"></i> {{ trans('common.list')}}</a>
+                                    class="fa fa-list"></i> List</a>
                         </div>
                     </div>
                     <div class="ibox-content">
                         <!---FORM--->
-                        <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.update', $shop->id )}}">
+                        <form role="form" method="post" action="{{route( strtolower($pageTitle) . '.update', $company->id )}}">
                             @method('PUT')
                             @csrf
                             <!---Name--->
@@ -37,11 +37,11 @@
                                 <input type="text" name="phone" value="{{ old('phone', $company->phone) }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
                                 <span class="form-text m-b-none text-danger"> @error('phone') {{ $message }} @enderror </span>
                             </div>
-                            <!---Mobile--->
+                            <!---Phone--->
                             <div class="form-group">
-                                <label for="mobile" class="font-bold">Mobile<span class="text-danger">*</span></label>
-                                <input type="text" name="mobile" value="{{ old('mobile', $company->mobile) }}" maxlength="11" placeholder="Enter mobile" class="form-control" required>
-                                <span class="form-text m-b-none text-danger"> @error('mobile', $company->mobile) {{ $message }} @enderror </span>
+                                <label for="website" class="font-bold">Website<span class="text-danger">*</span></label>
+                                <input type="text" name="website" value="{{ old('website', $company->website) }}" maxlength="11" placeholder="Enter phone" class="form-control" required>
+                                <span class="form-text m-b-none text-danger"> @error('website') {{ $message }} @enderror </span>
                             </div>
                             <!---Address--->
                             <div class="form-group">
@@ -52,8 +52,8 @@
                             <!---{{ $pageTitle }} CONTROL BUTTON--->
                             <div class="form-group row">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>{{ trans('common.create')}}</button>
-                                    <a class="btn btn-danger" href="{{route( strtolower($pageTitle) . '.index')}}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>{{ trans('common.go_back')}}</a>
+                                    <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+                                    <a class="btn btn-danger" href="{{route( strtolower($pageTitle) . '.index')}}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>List</a>
                                 </div>
                             </div>
                         </form>
