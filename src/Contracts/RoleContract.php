@@ -3,7 +3,7 @@
 namespace Mukul\Matrixusermanagement\Contracts;
 
 /**
- * Interface RoleContract
+ * Interface roleContract
  * @package Mukul\Matrixusermanagement\Contracts
  */
 interface RoleContract

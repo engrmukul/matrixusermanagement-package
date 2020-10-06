@@ -21,4 +21,7 @@ Route::group(['middleware' => ['web'], 'namespace'=>'Mukul\Matrixusermanagement\
 
     Route::resource('menus', 'MenuController', ['except' => ['show']]);
     Route::get('menus/get-data', 'MenuController@getData');
+
+    Route::resource('roles', 'RoleController', ['except' => ['show']]);
+    Route::get('roles/get-data', 'RoleController@getData');
 });

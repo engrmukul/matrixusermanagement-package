@@ -8,12 +8,14 @@ use Mukul\Matrixusermanagement\Contracts\DepartmentContract;
 use Mukul\Matrixusermanagement\Contracts\DesignationContract;
 use Mukul\Matrixusermanagement\Contracts\MenuContract;
 use Mukul\Matrixusermanagement\Contracts\ModuleContract;
+use Mukul\Matrixusermanagement\Contracts\RoleContract;
 use Mukul\Matrixusermanagement\Repositories\BranchRepository;
 use Mukul\Matrixusermanagement\Repositories\CompanyRepository;
 use Mukul\Matrixusermanagement\Repositories\DepartmentRepository;
 use Mukul\Matrixusermanagement\Repositories\DesignationRepository;
 use Mukul\Matrixusermanagement\Repositories\MenuRepository;
 use Mukul\Matrixusermanagement\Repositories\ModuleRepository;
+use Mukul\Matrixusermanagement\Repositories\RoleRepository;
 
 class MatrixUserManagementServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,7 @@ class MatrixUserManagementServiceProvider extends ServiceProvider
         DesignationContract::class => DesignationRepository::class,
         ModuleContract::class => ModuleRepository::class,
         MenuContract::class => MenuRepository::class,
+        RoleContract::class => RoleRepository::class,
     ];
 
     public function boot()
