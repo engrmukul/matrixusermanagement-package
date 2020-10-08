@@ -2,7 +2,7 @@
 
 
 Route::group(['middleware' => ['web'], 'namespace'=>'Mukul\Matrixusermanagement\Http\Controllers'], function (){
-    Route::get('matrix-users', 'MatrixUserController@index')->name('matrix.users');
+    Route::get('users', 'MatrixUserController@index')->name('users');
 
     Route::resource('companies', 'CompanyController', ['except' => ['show']]);
     Route::get('companies/get-data', 'CompanyController@getData');

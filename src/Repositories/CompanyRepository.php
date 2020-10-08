@@ -74,7 +74,7 @@ class CompanyRepository extends BaseRepository implements CompanyContract
         try {
             $collection = collect($params);
 
-            $created_by = 1;//auth()->user()->id;
+            $created_by = auth()->user()->id;
 
             $merge = $collection->merge(compact('created_by'));
 
@@ -99,7 +99,7 @@ class CompanyRepository extends BaseRepository implements CompanyContract
 
         $collection = collect($params)->except('_token');
 
-        $updated_by = 1;//auth()->user()->id;
+        $updated_by = auth()->user()->id;
 
         $merge = $collection->merge(compact('updated_by'));
 
@@ -120,7 +120,7 @@ class CompanyRepository extends BaseRepository implements CompanyContract
 
         $collection = collect($params)->except('_token');
 
-        $deleted_by = 1;//auth()->user()->id;
+        $deleted_by = auth()->user()->id;
 
         $merge = $collection->merge(compact('deleted_by'));
 

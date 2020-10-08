@@ -74,9 +74,9 @@ class RoleRepository extends BaseRepository implements RoleContract
         try {
             $collection = collect($params);
 
-            $created_by = 1;//auth()->user()->id;
+            $created_by = auth()->user()->id;
 
-            $company_id = 3;//auth()->user()->company_id;
+            $company_id = auth()->user()->company_id;
 
             $merge = $collection->merge(compact('created_by', 'company_id'));
 
@@ -101,7 +101,7 @@ class RoleRepository extends BaseRepository implements RoleContract
 
         $collection = collect($params)->except('_token');
 
-        $updated_by = 1;//auth()->user()->id;
+        $updated_by = auth()->user()->id;
 
         $merge = $collection->merge(compact('updated_by'));
 
@@ -122,7 +122,7 @@ class RoleRepository extends BaseRepository implements RoleContract
 
         $collection = collect($params)->except('_token');
 
-        $deleted_by = 1;//auth()->user()->id;
+        $deleted_by = auth()->user()->id;
 
         $merge = $collection->merge(compact('deleted_by'));
 

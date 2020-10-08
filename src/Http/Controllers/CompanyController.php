@@ -8,7 +8,7 @@ use Mukul\Matrixusermanagement\Contracts\CompanyContract;
 use Mukul\Matrixusermanagement\Http\Requests\CompanyStoreFormRequest;
 use Mukul\Matrixusermanagement\Http\Requests\CompanyUpdateFormRequest;
 
-class BranchController extends BaseController
+class CompanyController extends BaseController
 {
     protected $companyRepository;
 
