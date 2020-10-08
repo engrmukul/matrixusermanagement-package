@@ -19,7 +19,10 @@
         "laravel": {
             "providers": [
                 "Mukul\\Matrixusermanagement\\MatrixusermanagementServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Matrixusermanagement": "Mukul\\Matrixusermanagement\\MatrixusermanagementServiceProvider"
+            }
         }
     }
 }
